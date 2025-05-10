@@ -1,0 +1,17 @@
+import { Plant } from './types';
+
+export interface State {
+  allPlants: Plant[]; 
+  gardenPlants: Plant[]; 
+  currentPage: string; 
+  gardenName: string; 
+  loading: boolean; 
+
+export const initialState: State = {
+  allPlants: [],
+  gardenPlants: [],
+  currentPage: 'home',
+  gardenName: 'Mi Jardín Virtual',
+  loading: true,
+};
+}

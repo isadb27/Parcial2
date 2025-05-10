@@ -1,24 +1,30 @@
-export interface Action {
-    type: string;
-    payload?: string;
-}
+type Action = {
+  type: string;
+  payload?: any;
+};
 
-export class Dispatcher {
-    private _listeners: Array<(action: Action) => void>;
+type Listener = () => void;
 
-    constructor() {
-        this._listeners = [];
-    }
+class Dispatcher {
+  private listeners: Listener[] = [];
+  private state: any = {
+    allPlants: [],
+    gardenPlants: [],
+    currentPage: 'home',
+    gardenName: 'Mi Jardín Virtual',
+    loading: true,
+  };
 
-    register(callback: (action: Action) => void): void {
-        this._listeners.push(callback);
-    }
-
-    dispatch(action: any): void {
-        for (const listener of this._listeners) {
-            listener(action);
+  dispatch(action: Action) {
+    switch (action.type) {
+      case 'SET_PLANTS':
+        this.state.allPlants = action.payload;
+        this.state.loading = false;
+        break;
+      case 'ADD_TO_GARDEN':
+        if (!this.state.gardenPlants.includes(action.payload)) {
+          this.state.gardenPlants
         }
     }
 }
-
-export const AppDispatcher = new Dispatcher();
+}
